@@ -19,3 +19,5 @@ If a radioactive mutant vampire bunny is born then each turn it will change exac
 - Radioactive vampire bunnies are excluded from regular breeding and do not count as adult
   bunnies.
 - Radioactive vampire bunnies do not die until they reach age 50.
+
+Original Project Description created by Dr. Leslie Kerby, CS Department, Idaho State University
