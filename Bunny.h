@@ -12,29 +12,44 @@ private:
     string name;
     bool radioactive_mutant_vampire_bunny;
 
-    int getRandomNumber(){
-        return 1 + ( rand() % ( 100 - 1 + 1 ) );
+    static int getRandomNumber(){
+        //return 1 + ( rand() % ( 100 - 1 + 1 ) );
+        return rand() % 100;
     }
 
-    void setGender(){
+    /// Set the gender of a bunny.
+    void setGender() {
         string genders[] = {"male", "female", "genderX"};
         int ran = getRandomNumber();
-        if(ran > 53) {
+        if (ran > 53) {
             gender = genders[0];
-        }
-        else if(ran > 6){
+        } else if (ran > 6) {
             gender = genders[1];
-        }
-        else{
+        } else {
             gender = genders[2];
         }
     }
+
+    /// Overloaded method that sets the color of the bunny. Color is chosen randomly between mother and father.
+    /// \param colorM The color of the mother.
+    /// \param colorF The color of the father.
+    void setColor(string colorM, string colorF){
+        int ran = getRandomNumber();
+        if(ran > 50){
+            color = colorM;
+        }
+        else{
+            color = colorF;
+        }
+    }
+
+    /// Overloaded method that sets the color of the bunny. Color is chosen randomly from list of all available options.
     void setColor(){
         string colors[] = {"white", "brown", "black", "spotted"};
         color = colors[getRandomNumber() / 25];
     }
     void setName(){
-        string names[] = {"Bob", "Mary", "Joe", "Susan", "Jimmy", "Quark", "Karen", "Kim", "Susan", "Roberto", "Juan", "Kirk", "Earl", "Liam", "Bert", "Zod", "Shepard", "Wrex", "Justin", "Dan"};
+        string names[] = {"Bob", "Mary", "Joe", "Susan", "Jimmy", "Quark", "Karen", "Kim", "Susan", "Roberto", "Juan", "Kirk", "Earl", "Liam", "Bert", "Zod", "Shepard", "Wrex", "Justin", "Dan", "Jonah"};
         name = names[getRandomNumber() / 5];
     }
     void setMutant(){
@@ -47,7 +62,7 @@ private:
         }
     }
 public:
-    /// Function that adds a yar to the age and checks whether the bunny will die.
+    /// Function that adds a year to the age and checks whether the bunny will die.
     /// \return Returns false when the bunny will die.
     bool addAgeCheck(){
         age++;
@@ -61,10 +76,36 @@ public:
         }
         return true;
     }
+
+    string getColor(){
+        return color;
+    }
+    bool getMutant(){
+        return radioactive_mutant_vampire_bunny;
+    }
+    string getGender(){
+        return gender;
+    }
+    string getName(){
+        return name;
+    }
+
+    /// Constructor for the Bunny class. Used when the color is not known. All attributes are randomly assigned according to project directions.
     Bunny(){
         age = 0;
         setGender();
         setColor();
+        setName();
+        setMutant();
+    }
+
+    /// Constructor for the Bunny class. Used when the color of the father and mother are known.
+    /// \param colorM The color of the mother.
+    /// \param colorF The color of the father.
+    Bunny(string colorM, string colorF){
+        age = 0;
+        setGender();
+        setColor(colorM, colorF);
         setName();
         setMutant();
     }
