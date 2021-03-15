@@ -89,6 +89,12 @@ public:
     string getName(){
         return name;
     }
+    int getAge(){
+        return age;
+    }
+    void transformMutant(){
+        radioactive_mutant_vampire_bunny = true;
+    }
 
     /// Constructor for the Bunny class. Used when the color is not known. All attributes are randomly assigned according to project directions.
     Bunny(){
@@ -96,7 +102,7 @@ public:
         setGender();
         setColor();
         setName();
-        setMutant();
+        radioactive_mutant_vampire_bunny = false;
     }
 
     /// Constructor for the Bunny class. Used when the color of the father and mother are known.
