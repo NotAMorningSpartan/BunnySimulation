@@ -73,28 +73,46 @@ public:
 
     /// Adds a year of age to all bunny vectors and handles deletion when necessary.
     void addAge(){
+        bunnies = vector<Bunny*>();
         for(int i = 0; i < males.size(); i++){
+            cout << "Bunny Age: " << males[i].getAge() << endl;
             bool notDead = males[i].addAgeCheck();
             if(!notDead){
                 males.erase(males.begin() + i);
+                i = -1;
+            }
+            else{
+                bunnies.push_back(&males[i]);
             }
         }
         for(int i = 0; i < females.size(); i++){
+            cout << "Bunny Age: " << females[i].getAge() << endl;
             bool notDead = females[i].addAgeCheck();
             if(!notDead){
                 females.erase(females.begin() + i);
+                i = -1;
+            }
+            else{
+                bunnies.push_back(&females[i]);
             }
         }
         for(int i = 0; i < genderXs.size(); i++){
+            cout << "Bunny Age: " << genderXs[i].getAge() << endl;
             bool notDead = genderXs[i].addAgeCheck();
             if(!notDead){
                 genderXs.erase(genderXs.begin() + i);
+                i = -1;
+            }
+            else{
+                bunnies.push_back(&genderXs[i]);
             }
         }
         for(int i = 0; i < mutants.size(); i++){
+            cout << "Bunny Age: " << mutants[i].getAge() << endl;
             bool notDead = mutants[i].addAgeCheck();
             if(!notDead){
                 mutants.erase(mutants.begin() + i);
+                i = -1;
             }
         }
     }
@@ -105,13 +123,28 @@ public:
     }
 
     void breeding(){
-        shuffleBunnies();
-        for(int i = 0; i < bunnies.size() - 1; i+=2){
-            if((bunnies[i]->getAge() >= 2 && bunnies[i]->getAge() <= 8) && (bunnies[i + 1]->getAge() >= 2 && bunnies[i + 1]->getAge() <= 8)){
-                bunnyBorn(bunnies[i]->getColor(), bunnies[i + 1]->getColor());
+        vector<Bunny> breedingMales;
+        vector<Bunny> breedingFemales;
+        vector<Bunny> breedingGenderX;
+        for(int i = 0; i < males.size(); i++){
+            if(males[i].getAge() > 1 && males[i].getAge() < 9){
+                breedingMales.push_back(males[i]);
             }
         }
+        for(int i = 0; i < females.size(); i++){
+            if(females[i].getAge() > 1 && females[i].getAge() < 9){
+                breedingFemales.push_back(females[i]);
+            }
+        }
+        for(int i = 0; i < genderXs.size(); i++){
+            if(genderXs[i].getAge() > 1 && genderXs[i].getAge() < 9){
+                breedingGenderX.push_back(genderXs[i]);
+            }
+        }
+        //cout << "Bunnies breeding: " << to_string(breedingMales.size()) << " " << to_string(breedingFemales.size()) << " " << to_string(breedingGenderX.size()) << endl;
     }
+
+    /// Take all bunnies that are mutants and move them out of standard vectors and into the mutant vectors.
     void moveMutants(){
         for(int i = 0; i < males.size(); i++){
             if(males[i].getMutant() == true){
@@ -135,6 +168,8 @@ public:
             }
         }
     }
+
+    /// Using the count of current mutants, transform bunnies into new mutants.
     void createMutants(){
         if(mutants.size() == bunnies.size()){
             return;
@@ -164,7 +199,7 @@ public:
             //End of turn, display results.
             cout << "Turn " << to_string(turncount) << ": Males: " << to_string(males.size()) << ", Females: "
             << to_string(females.size()) << ", GenderX's: " + to_string(genderXs.size()) + ", Mutants: "
-            << to_string(mutants.size()) << endl;
+            << to_string(mutants.size()) << ", Total Bunnies: " << to_string(bunnies.size()) << endl;
             turncount++;
         }
     }

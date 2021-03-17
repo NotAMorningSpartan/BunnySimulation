@@ -6,6 +6,7 @@
 
 int main(){
     Simulation s = Simulation();
+    srand(time(0));
     s.runSimulation();
     return 0;
 }
