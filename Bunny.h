@@ -28,7 +28,7 @@ private:
     void setGender() {
         string genders[] = {"male", "female", "genderX"};
         int ran = getRandomNumber(1,100);
-        cout << to_string(ran) << endl;
+        //cout << to_string(ran) << endl;
         if (ran > 53) {
             gender = genders[0];
         } else if (ran > 6) {
